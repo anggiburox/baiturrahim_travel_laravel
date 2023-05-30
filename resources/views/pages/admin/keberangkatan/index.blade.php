@@ -26,9 +26,9 @@
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">ID Keberangaktan</th>
+                                <th scope="col">ID</th>
                                 <th scope="col">NIK - Nama Jamaah</th>
-                                <th scope="col">Nama Paket Umrah - Harga Paket Umrah</th>
+                                <th scope="col">Nama - Harga Paket Umrah</th>
                                 <th scope="col">Tanggal Keberangkatan</th>
                                 <th scope="col">Titik Kumpul</th>
                                 <th scope="col">Aksi</th>
@@ -43,7 +43,7 @@
                                 <td>{{$p->ID_Keberangkatan}}</td>
                                 <td>{{$p->NIK}} - {{$p->Nama_Jamaah}}</td>
                                 <td>{{$p->Nama_Paket_Umrah}} - Rp.
-                                    {{ number_format($p->Harga_keberangkatan, 0, ',', '.') }}</td>
+                                    {{ number_format($p->Harga_Paket_Umrah, 0, ',', '.') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($p->Tanggal_Keberangkatan)->isoFormat('D MMMM Y') }}</td>
                                 <td>{{$p->Titik_Kumpul}}</td>
                                 <td>

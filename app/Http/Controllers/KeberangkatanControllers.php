@@ -32,9 +32,9 @@ class KeberangkatanControllers extends Controller
 	DB::table('keberangkatan')->insert([
 		'ID_Keberangkatan' => $request->id_keberangkatan,
 		'ID_Jamaah' => $request->id_jamaah,
-        'ID_Paket_Umrah' => $id_paket_umrah,
-        'Tanggal_Keberangkatan' => $tanggal_keberangkatan,
-        'Titik_Kumpul' => $titik_kumpul
+        'ID_Paket_Umrah' => $request->id_paket_umrah,
+        'Tanggal_Keberangkatan' => $request->tanggal_keberangkatan,
+        'Titik_Kumpul' => $request->titik_kumpul
 	]);
 
 	// alihkan halaman ke halaman keberangkatan

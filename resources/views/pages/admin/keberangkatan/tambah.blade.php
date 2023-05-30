@@ -24,22 +24,22 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="inputText" class="col-sm-4 col-form-label">Nama Paket<label
+                    <label for="inputText" class="col-sm-4 col-form-label select2">Nama Paket<label
                             style='color:red;'>(*)</label></label>
                     <div class="col-sm-5">
                         <select name='id_paket_umrah' class='form-control'>
                             <option value="">-- Pilih Data Paket --</option>
-                                @foreach($paket as $pkt)
-                                    <option value="{{ $pkt->ID_Paket_Umrah }}">{{ $pkt->Nama_Paket_Umrah}}</option>
-                                </select>
-                            </div>
+                            @foreach($paket as $pkt)
+                            <option value="{{ $pkt->ID_Paket_Umrah }}">{{ $pkt->Nama_Paket_Umrah}}</option>
                             @endforeach
+                        </select>
+                    </div>
                 </div>
                 <div class="row mb-3">
                     <label for="inputText" class="col-sm-4 col-form-label">Harga Paket<label
                             style='color:red;'>(*)</label></label>
                     <div class="col-sm-5">
-                        <input type='text' class='form_control' value='{{$pkt->Harga_Paket_Umrah}}' readonly style='background:#e6e6fa;'>
+                        <input type='text' class='form_control' value='' readonly style='background:#e6e6fa;'>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -48,9 +48,9 @@
                     <div class="col-sm-5">
                         <select name='id_jamaah' class='form-control'>
                             <option value="">-- Pilih Data Jamaah --</option>
-                                @foreach($jamaah as $jmh)
-                                    <option value="{{ $jmh->ID_Jamaah }}">{{ $jmh->Nama_Jamaah}}</option>
-                                @endforeach
+                            @foreach($jamaah as $jmh)
+                            <option value="{{ $jmh->ID_Jamaah }}">{{ $jmh->Nama_Jamaah}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -58,7 +58,8 @@
                     <label for="inputText" class="col-sm-4 col-form-label">Tanggal Keberangkatan <label
                             style='color:red;'>(*)</label></label>
                     <div class="col-sm-5">
-                        <input type="date" class="form-control" name="tanggal_keberangkatan" value='{{date("Y-m-d")}}' required>
+                        <input type="date" class="form-control" name="tanggal_keberangkatan" value='{{date("Y-m-d")}}'
+                            required>
                     </div>
                 </div>
                 <div class="row mb-3">
