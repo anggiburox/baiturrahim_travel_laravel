@@ -23,14 +23,17 @@
     <link href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet" />
     <link href="{{asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet" />
+    <link href="{{asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet" />
     <!-- <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet" /> -->
     <!-- <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet" /> -->
     <link href="{{asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet" />
-    <!-- <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet" /> -->
 
     <!-- Template Main CSS File -->
     <link href="{{asset('assets/css/style.css') }}" rel="stylesheet" />
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
     <!-- =======================================================
   * Template Name: NiceAdmin
   * Updated: Mar 09 2023 with Bootstrap v5.2.3
@@ -69,14 +72,13 @@
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
                             <h6>Kevin Anderson</h6>
-                            <span>Web Designer</span>
                         </li>
                         <li>
                             <hr class="dropdown-divider" />
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                            <a class="dropdown-item d-flex align-items-center" href="/admin/profile">
                                 <i class="bi bi-person"></i>
                                 <span>My Profile</span>
                             </a>
@@ -86,27 +88,7 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                                <i class="bi bi-gear"></i>
-                                <span>Account Settings</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider" />
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                                <i class="bi bi-question-circle"></i>
-                                <span>Need Help?</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider" />
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" href="/logout">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Sign Out</span>
                             </a>
@@ -168,15 +150,16 @@
     <!-- Vendor JS Files -->
     <!-- <script src="assets/vendor/apexcharts/apexcharts.min.js"></script> -->
     <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- <script src="assets/vendor/chart.js/chart.umd.js"></script>
-    <script src="assets/vendor/echarts/echarts.min.js"></script> -->
+    <!-- <script src="assets/vendor/chart.js/chart.umd.js"></script> -->
+    <script src="{{asset('assets/vendor/echarts/echarts.min.js') }}"></script>
     <!-- <script src="assets/vendor/quill/quill.min.js"></script>-->
     <script src="{{asset('assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
-    <!-- <script src="{{asset('assets/vendor/tinymce/tinymce.min.js') }}"></script> -->
+    <script src="{{asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
     <!-- <script src="assets/vendor/php-email-form/validate.js"></script> -->
 
     <!-- Template Main JS File -->
     <script src="{{asset('assets/js/main.js') }}"></script>
+
 </body>
 
 </html>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardAdmin;
+use App\Http\Controllers\ProfileAdmin;
 use App\Http\Controllers\PaketUmrahControllers;
 use App\Http\Controllers\JamaahControllers;
 use App\Http\Controllers\KeberangkatanControllers;
@@ -21,6 +22,10 @@ Route::get('/', function () {
     return view('layout/admin');
 });
 
+
+Route::get('/admin/profile', [ProfileAdmin::class, 'index']);
+Route::post('/admin/profile/{id}',[ProfileAdmin::class, 'editprofile']);
+
 //route admin dashboard    
 Route::get('/admin/dashboard', [DashboardAdmin::class, 'index']);
   
@@ -39,6 +44,9 @@ Route::post('/admin/jamaah/store', [JamaahControllers::class, 'store']);
 Route::get('/admin/jamaah/edit/{id}',[JamaahControllers::class, 'edit']);
 Route::post('/admin/jamaah/update',[JamaahControllers::class, 'update']);
 Route::get('/admin/jamaah/hapus/{id}',[JamaahControllers::class, 'hapus']);
+Route::get('/admin/jamaah/detail/{id}',[JamaahControllers::class, 'detail']);
+Route::get('/admin/jamaah/cetak_pdf',[JamaahControllers::class, 'cetak_pdf']);
+Route::get('/admin/jamaah/downloadfile/{id}',[JamaahControllers::class, 'downloadfile']);
 
 //route admin keberangkatan
 Route::get('/admin/keberangkatan/', [KeberangkatanControllers::class, 'index']);

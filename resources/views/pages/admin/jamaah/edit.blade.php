@@ -49,8 +49,8 @@
                     <div class="tab-pane fade show active profile-overview" id="profile-edit">
 
                         <!-- Profile Edit Form -->
-                        <form class="row g-3 needs-validation mt-3" action="/admin/jamaah/update" method="POST"
-                            enctype="multipart/form-data">
+                        <form class="row g-3 needs-validation" id="form-perbaharui" action="/admin/jamaah/update"
+                            method="POST" enctype="multipart/form-data">
 
                             {{ csrf_field() }}
 
@@ -206,7 +206,8 @@
 
 
                             <div class="col-12">
-                                <button class="btn btn-success" type="submit"><i class='bi bi-check-circle'></i>&nbsp;
+                                <button class="btn btn-success" type="button" onclick="showConfirmation()"><i
+                                        class='bi bi-check-circle'></i>&nbsp;
                                     Perbaharui</button>
                                 <a href="/admin/jamaah" class="btn btn-secondary"><i class='bi bi-x-circle'></i>&nbsp;
                                     Kembali</a>
@@ -221,6 +222,22 @@
 
     </div>
 </div>
+
+<script>
+function showConfirmation() {
+    swal({
+        title: "Konfirmasi",
+        text: "Apakah Anda yakin memperbaharui data ini?",
+        icon: "warning",
+        buttons: ["Batal", "Ya"],
+        dangerMode: true,
+    }).then((confirm) => {
+        if (confirm) {
+            document.getElementById('form-perbaharui').submit();
+        }
+    });
+}
+</script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @if(Session::has('errors'))
 <script>

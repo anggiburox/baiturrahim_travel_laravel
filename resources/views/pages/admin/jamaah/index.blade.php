@@ -19,20 +19,19 @@
                             <i class="bi bi-plus-lg" aria-hidden="true"></i>&nbsp;
                             Tambah data
                         </a>
+                        <a href="jamaah/cetak_pdf" class="btn btn-primary" target="_blank">CETAK PDF</a>
                     </h5>
 
                     <!-- Table with stripped rows -->
                     <table class="table datatable">
                         <thead>
                             <tr>
-                                <th scope="col">No</th>
+                                <th>No</th>
                                 <th scope="col">NIK</th>
                                 <th scope="col">Tanggal Daftar</th>
                                 <th scope="col">Nama Jamaah</th>
                                 <th scope="col">Tempat, Tanggal Lahir</th>
                                 <th scope="col">Jenis Kelamin</th>
-                                <th scope="col">Alamat</th>
-                                <th scope="col">Nomor Telepon</th>
                                 <th scope="col">Foto Jamaah</th>
                                 <th scope="col">Aksi</th>
                             </tr>
@@ -49,8 +48,6 @@
                                 <td>{{$p->Tempat_Lahir}},
                                     {{ \Carbon\Carbon::parse($p->Tanggal_Lahir)->isoFormat('D MMMM Y') }}</td>
                                 <td>{{$p->Jenis_Kelamin}}</td>
-                                <td>{{$p->Alamat}}</td>
-                                <td>{{$p->Nomor_Telepon}}</td>
                                 <td>@if(empty($p->Foto_Jamaah))
                                     Foto belum dimasukan
                                     @else<img src="{{ asset('assets/Foto Jamaah/' . $p->Foto_Jamaah) }}" width="100"
@@ -59,10 +56,14 @@
                                 </td>
                                 <td>
                                     <a href="jamaah/edit/{{ $p->ID_Jamaah}}" data-toggle="tooltip" data-placement="top"
-                                        title="Perbaharui" class="btn mb-1 btn-primary" type="button"><i
+                                        title="Perbaharui" class="btn mb-1 btn-primary btn-sm" type="button"><i
                                             class="ri-edit-box-line"></i>&nbsp; Edit</a>
                                     |
-                                    <a href="jamaah/hapus/{{ $p->ID_Jamaah}}" class="delete btn mb-1 btn-danger"
+                                    <a href="jamaah/detail/{{ $p->ID_Jamaah}}" data-toggle="tooltip"
+                                        data-placement="top" title="Perbaharui" class="btn mb-1 btn-info btn-sm"
+                                        type="button"><i class="bi bi-eye-fill"></i>&nbsp; Detail</a>
+                                    |
+                                    <a href="jamaah/hapus/{{ $p->ID_Jamaah}}" class="delete btn mb-1 btn-danger btn-sm"
                                         onclick="showConfirmation(event)" data-toggle="tooltip" data-placement="top"
                                         title="Hapus" type="button"><i class="bi bi-trash-fill"></i>&nbsp; Hapus</a>
                                 </td>

@@ -15,4 +15,15 @@ class JamaahModel extends Model
     public $timestamps = false;
     public $incrementing = false;
     protected $primaryKey = 'ID_Jamaah';
+
+
+    public static function fetchdata($id){
+        // Jika ID materi tidak diberikan, ambil semua data materi
+        if ($id == null) {
+            return JamaahModel::all();
+        }
+    
+        // Ambil data materi berdasarkan ID
+        // return JamaahModel::where('ID_Jamaah', $id)->first();
+        }
 }

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\PasienModel;
-use App\Models\DokterModel;
-use App\Models\PerawatModel;
-use App\Models\KasirModel;
+use App\Models\PaketUmrahModel;
+use App\Models\JamaahModel;
+use App\Models\KeberangkatanModel;
 use Illuminate\Support\Facades\DB;
 
 class DashboardAdmin extends Controller
@@ -17,11 +16,21 @@ class DashboardAdmin extends Controller
      */    
     public function index()
     {   
-        // $pasien = PasienModel::count();
-        // $dokter = DokterModel::count();
-        // $perawat = PerawatModel::count();
-        // $kasir = KasirModel::count();
+        $paket = PaketUmrahModel::count();
+        $jamaah = JamaahModel::count();
 
-        return view('pages/admin/dashboard',  []);
+        $jamaahPerBulan = JamaahModel::select(DB::raw('MONTH(Tanggal_Daftar) as bulan'), DB::raw('YEAR(Tanggal_Daftar) as tahun'), DB::raw('count(*) as total'))
+        ->groupBy('bulan', 'tahun')
+        ->get();
+
+
+        $keberangkatan = KeberangkatanModel::count();
+        $keberangkatanPerBulan = KeberangkatanModel::select(DB::raw('MONTH(Tanggal_Keberangkatan) as bulan'), DB::raw('YEAR(Tanggal_Keberangkatan) as tahun'), DB::raw('count(*) as total'))
+        ->groupBy('bulan', 'tahun')
+        ->get();
+
+        return view('pages/admin/dashboard',  ['paket'=>$paket, 'jamaah'=>$jamaah, 'keberangkatan'=>$keberangkatan, 
+        'jamaahPerBulan' => $jamaahPerBulan, 
+        'keberangkatanPerBulan' => $keberangkatanPerBulan]);
     }
 }

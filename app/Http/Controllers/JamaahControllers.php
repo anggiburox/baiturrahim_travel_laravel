@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\JamaahModel;
 use Illuminate\Support\Facades\DB;
-
+use PDF;
+use Illuminate\Support\Facades\File;
 class JamaahControllers extends Controller
 {
     /**
@@ -16,6 +17,14 @@ class JamaahControllers extends Controller
     {   
         $pgw = DB::table('jamaah')->get();
         return view('pages/admin/jamaah/index',['pgw' => $pgw]);
+    }
+
+	public function cetak_pdf()
+    {
+        $pgw = DB::table('jamaah')->get();
+
+		$pdf = PDF::loadview('pages/admin/jamaah/jamaah_pdf',['pgw'=>$pgw]);
+		return $pdf->download('data-jamaah-pdf.pdf');
     }
 
     public function tambah(){
@@ -92,7 +101,7 @@ class JamaahControllers extends Controller
     public function edit($id)
 	{
 		// mengambil data jamaah berdasarkan id yang dipilih
-		$pgw = DB::table('jamaah')->where('ID_jamaah',$id)->get();
+		$pgw = DB::table('jamaah')->where('ID_Jamaah',$id)->get();
 		// passing data jamaah yang didapat ke view edit.blade.php
 		return view('pages/admin/jamaah/edit',['pgw' => $pgw]);
 	}
@@ -145,6 +154,12 @@ class JamaahControllers extends Controller
 			'Tanggal_Daftar' => $request->tanggal_daftar
 		]);
 		}else{
+			
+		   //ambil file
+		   $bukti_dokumentasi = $request->file('bukti_dokumentasi');
+			$nama_buktidokumentasi = $bukti_dokumentasi->getClientOriginalName();
+			$tujuandokumentasi = 'assets/Bukti Dokumentasi';
+			$bukti_dokumentasi->move($tujuandokumentasi,$nama_buktidokumentasi);
 			DB::table('jamaah')->where('ID_Jamaah',$request->id_jamaah)->update([
 				'NIK' => $request->nik,
 				'Nama_jamaah' => $request->nama_jamaah,
@@ -157,12 +172,34 @@ class JamaahControllers extends Controller
 				'Asal_Kota' => $request->asal_kota,
 				'Golongan_Darah' => $request->golongan_darah,
 				'Pendidikan' => $request->pendidikan,
-				'Tanggal_Daftar' => $request->tanggal_daftar
+				'Tanggal_Daftar' => $request->tanggal_daftar,
+				'Bukti_Dokumentasi' => $nama_buktidokumentasi
 			]);
 		}
 		// alihkan halaman ke halaman jamaah
 		return redirect('/admin/jamaah')->withSuccess('Data berhasil diperbaharui');
     }
+
+	public function downloadfile($id)
+    {
+	  // Generate path file
+	  $path = public_path('assets/Bukti Dokumentasi/' . $id);
+	  
+	  // Download file
+	  return response()->download($path);
+    }
+
+	
+	public function detail($id)
+	{
+		// mengambil data jamaah berdasarkan id yang dipilih
+		$pgw = DB::table('jamaah')->where('ID_Jamaah',$id)->get();
+		// passing data jamaah yang didapat ke view edit.blade.php
+		return view('pages/admin/jamaah/detail',['pgw' => $pgw]);
+	}
+
+	
+
 
 	// method untuk hapus data jamaah
 	public function hapus($id){
