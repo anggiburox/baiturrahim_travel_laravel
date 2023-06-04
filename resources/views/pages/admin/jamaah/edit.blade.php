@@ -67,14 +67,6 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="inputText" class="col-sm-4 col-lg-4 col-form-label">Tanggal Daftar <label
-                                        style='color:red;'>(*)</label></label>
-                                <div class="col-sm-8 col-lg-8">
-                                    <input type="date" class="form-control" name="tanggal_daftar"
-                                        value='{{ $pp->Tanggal_Daftar }}' required>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
                                 <label for="about" class="col-md-4 col-lg-4 col-form-label">Nama Jamaah <label
                                         style='color:red;'>(*)</label></label>
                                 <div class="col-md-8 col-lg-8">
@@ -161,7 +153,14 @@
                                         value='{{$pp->Asal_Kota}}'>
                                 </div>
                             </div>
-
+                            <div class="row mb-3">
+                                <label for="inputText" class="col-sm-4 col-lg-4 col-form-label">Tanggal Daftar <label
+                                        style='color:red;'>(*)</label></label>
+                                <div class="col-sm-8 col-lg-8">
+                                    <input type="date" class="form-control" name="tanggal_daftar"
+                                        value='{{ $pp->Tanggal_Daftar }}' required>
+                                </div>
+                            </div>
                             <div class="row mb-3">
                                 <label for="Facebook" class="col-md-4 col-lg-4 col-form-label">Golongan Darah </label>
                                 <div class="col-md-8 col-lg-8">

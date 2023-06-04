@@ -31,39 +31,48 @@ class JamaahControllers extends Controller
         return view('pages/admin/jamaah/tambah');
     }
 
-    public function store(Request $request){
-		$validatedData = $request->validate([
-            'foto_jamaah' => 'sometimes|image|mimes:jpeg,jpg,png',
-        ],[
-            'foto_jamaah.image' => 'File yang diunggah harus berupa gambar.',
-            'foto_jamaah.mimes' => 'Format file gambar harus JPEG, JPG, atau PNG.',
-        ]);
-		if($request->hasFile('foto_jamaah')){
-            $file = $request->file('foto_jamaah');
-   
-            $foto_jamaah = $file->getClientOriginalName();
-			
+    public function store(Request $request)
+{
+    $validatedData = $request->validate([
+        'foto_jamaah' => 'sometimes|image|mimes:jpeg,jpg,png',
+    ], [
+        'foto_jamaah.image' => 'File yang diunggah harus berupa gambar.',
+        'foto_jamaah.mimes' => 'Format file gambar harus JPEG, JPG, atau PNG.',
+    ]);
 
-                 //cek apakah file adalah format gambar
-        if(!in_array($file->getClientOriginalExtension(),['jpeg','jpg','PNG'])){
+    // Inisialisasi variabel foto_jamaah dan nama_buktidokumentasi
+    $foto_jamaah = null;
+    $nama_buktidokumentasi = null;
+
+    if ($request->hasFile('foto_jamaah')) {
+        $file = $request->file('foto_jamaah');
+
+        // Cek apakah file adalah format gambar
+        if (!in_array($file->getClientOriginalExtension(), ['jpeg', 'jpg', 'png'])) {
             return redirect()->back()->withErrors('Format file foto harus JPEG, JPG, atau PNG.');
         }
 
-		   //ambil file
-		   $bukti_dokumentasi = $request->file('bukti_dokumentasi');
-	   
-		   $nama_buktidokumentasi = $bukti_dokumentasi->getClientOriginalName();
-		   
-		   //pindahkan file kedalam folder doc
-		   $tujuanfoto = 'assets/Foto Jamaah';
-		   $tujuandokumentasi = 'assets/Bukti Dokumentasi';
-		   $file->move($tujuanfoto,$foto_jamaah);
-		   $bukti_dokumentasi->move($tujuandokumentasi,$nama_buktidokumentasi);
-		   
-	// insert data ke table jamaah
-	DB::table('jamaah')->insert([
-		'NIK' => $request->nik,
-		'Nama_jamaah' => $request->nama_jamaah,
+        $foto_jamaah = $file->getClientOriginalName();
+
+        // Pindahkan file ke dalam folder foto jamaah
+        $tujuanfoto = 'assets/Foto Jamaah';
+        $file->move($tujuanfoto, $foto_jamaah);
+    }
+
+    if ($request->hasFile('bukti_dokumentasi')) {
+        $bukti_dokumentasi = $request->file('bukti_dokumentasi');
+
+        $nama_buktidokumentasi = $bukti_dokumentasi->getClientOriginalName();
+
+        // Pindahkan file ke dalam folder bukti dokumentasi
+        $tujuandokumentasi = 'assets/Bukti Dokumentasi';
+        $bukti_dokumentasi->move($tujuandokumentasi, $nama_buktidokumentasi);
+    }
+
+    // Insert data ke table jamaah
+    DB::table('jamaah')->insert([
+        'NIK' => $request->nik,
+        'Nama_jamaah' => $request->nama_jamaah,
         'Tempat_Lahir' => $request->tempat_lahir,
         'Tanggal_Lahir' => $request->tanggal_lahir,
         'Jenis_Kelamin' => $request->jenis_kelamin,
@@ -75,28 +84,13 @@ class JamaahControllers extends Controller
         'Pendidikan' => $request->pendidikan,
         'Foto_Jamaah' => $foto_jamaah,
         'Bukti_Dokumentasi' => $nama_buktidokumentasi,
-		'Tanggal_Daftar' => $request->tanggal_daftar
-	]);
-	}else{
-		DB::table('jamaah')->insert([
-			'NIK' => $request->nik,
-			'Nama_jamaah' => $request->nama_jamaah,
-			'Tempat_Lahir' => $request->tempat_lahir,
-			'Tanggal_Lahir' => $request->tanggal_lahir,
-			'Jenis_Kelamin' => $request->jenis_kelamin,
-			'Alamat' => $request->tempat_lahir,
-			'Nomor_Telepon' => $request->nomor_telepon,
-			'Pekerjaan' => $request->pekerjaan,
-			'Asal_Kota' => $request->asal_kota,
-			'Golongan_Darah' => $request->golongan_darah,
-			'Pendidikan' => $request->pendidikan,
-			'Tanggal_Daftar' => $request->tanggal_daftar
-		]);
-	}
+        'Tanggal_Daftar' => $request->tanggal_daftar
+    ]);
 
-	// alihkan halaman ke halaman jamaah
-	return redirect('/admin/jamaah/')->withSuccess('Data berhasil disimpan');
-    }
+    // Alihkan halaman ke halaman jamaah
+    return redirect('/admin/jamaah/')->withSuccess('Data berhasil disimpan');
+}
+
 
     public function edit($id)
 	{
@@ -114,28 +108,35 @@ class JamaahControllers extends Controller
             'foto_jamaah.image' => 'File yang diunggah harus berupa gambar.',
             'foto_jamaah.mimes' => 'Format file gambar harus JPEG, JPG, atau PNG.',
         ]);
-		if($request->hasFile('foto_jamaah')){
-            $file = $request->file('foto_jamaah');
-   
-            $foto_jamaah = $file->getClientOriginalName();
-			
 
-                 //cek apakah file adalah format gambar
-        if(!in_array($file->getClientOriginalExtension(),['jpeg','jpg','PNG'])){
-            return redirect()->back()->withErrors('Format file foto harus JPEG, JPG, atau PNG.');
-        }
-
-		   //ambil file
-		   $bukti_dokumentasi = $request->file('bukti_dokumentasi');
-		   
-		   $nama_buktidokumentasi = $bukti_dokumentasi->getClientOriginalName();
-		   
-		   //pindahkan file kedalam folder doc
-		   $tujuanfoto = 'assets/Foto Jamaah';
-		   $tujuandokumentasi = 'assets/Bukti Dokumentasi';
-		   $file->move($tujuanfoto,$foto_jamaah);
-		   $bukti_dokumentasi->move($tujuandokumentasi,$nama_buktidokumentasi);
-		   
+		 // Inisialisasi variabel foto_jamaah dan nama_buktidokumentasi
+		 $foto_jamaah = null;
+		 $nama_buktidokumentasi = null;
+	 
+		 if ($request->hasFile('foto_jamaah')) {
+			 $file = $request->file('foto_jamaah');
+	 
+			 // Cek apakah file adalah format gambar
+			 if (!in_array($file->getClientOriginalExtension(), ['jpeg', 'jpg', 'png'])) {
+				 return redirect()->back()->withErrors('Format file foto harus JPEG, JPG, atau PNG.');
+			 }
+	 
+			 $foto_jamaah = $file->getClientOriginalName();
+	 
+			 // Pindahkan file ke dalam folder foto jamaah
+			 $tujuanfoto = 'assets/Foto Jamaah';
+			 $file->move($tujuanfoto, $foto_jamaah);
+		 }
+	 
+		 if ($request->hasFile('bukti_dokumentasi')) {
+			 $bukti_dokumentasi = $request->file('bukti_dokumentasi');
+	 
+			 $nama_buktidokumentasi = $bukti_dokumentasi->getClientOriginalName();
+	 
+			 // Pindahkan file ke dalam folder bukti dokumentasi
+			 $tujuandokumentasi = 'assets/Bukti Dokumentasi';
+			 $bukti_dokumentasi->move($tujuandokumentasi, $nama_buktidokumentasi);
+		 }
 		   // update data jamaah
 		   DB::table('jamaah')->where('ID_Jamaah',$request->id_jamaah)->update([
 			'NIK' => $request->nik,
@@ -153,29 +154,6 @@ class JamaahControllers extends Controller
 			'Bukti_Dokumentasi' => $nama_buktidokumentasi,
 			'Tanggal_Daftar' => $request->tanggal_daftar
 		]);
-		}else{
-			
-		   //ambil file
-		   $bukti_dokumentasi = $request->file('bukti_dokumentasi');
-			$nama_buktidokumentasi = $bukti_dokumentasi->getClientOriginalName();
-			$tujuandokumentasi = 'assets/Bukti Dokumentasi';
-			$bukti_dokumentasi->move($tujuandokumentasi,$nama_buktidokumentasi);
-			DB::table('jamaah')->where('ID_Jamaah',$request->id_jamaah)->update([
-				'NIK' => $request->nik,
-				'Nama_jamaah' => $request->nama_jamaah,
-				'Tempat_Lahir' => $request->tempat_lahir,
-				'Tanggal_Lahir' => $request->tanggal_lahir,
-				'Jenis_Kelamin' => $request->jenis_kelamin,
-				'Alamat' => $request->tempat_lahir,
-				'Nomor_Telepon' => $request->nomor_telepon,
-				'Pekerjaan' => $request->pekerjaan,
-				'Asal_Kota' => $request->asal_kota,
-				'Golongan_Darah' => $request->golongan_darah,
-				'Pendidikan' => $request->pendidikan,
-				'Tanggal_Daftar' => $request->tanggal_daftar,
-				'Bukti_Dokumentasi' => $nama_buktidokumentasi
-			]);
-		}
 		// alihkan halaman ke halaman jamaah
 		return redirect('/admin/jamaah')->withSuccess('Data berhasil diperbaharui');
     }

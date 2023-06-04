@@ -25,14 +25,6 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="inputText" class="col-sm-4 col-form-label">Tanggal Daftar <label
-                            style='color:red;'>(*)</label></label>
-                    <div class="col-sm-5">
-                        <input type="date" class="form-control" name="tanggal_daftar" value='{{ date("Y-m-d") }}'
-                            required>
-                    </div>
-                </div>
-                <div class="row mb-3">
                     <label for="inputText" class="col-sm-4 col-form-label">Nama Jamaah <label
                             style='color:red;'>(*)</label></label>
                     <div class="col-sm-5">
@@ -50,7 +42,8 @@
                     <label for="inputText" class="col-sm-4 col-form-label">Tanggal Lahir <label
                             style='color:red;'>(*)</label></label>
                     <div class="col-sm-5">
-                        <input type="date" class="form-control" name="tanggal_lahir" required>
+                        <input type="date" class="form-control" name="tanggal_lahir" value='{{ date("Y-m-d") }}'
+                            required>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -100,6 +93,14 @@
                             style='color:red;'>(*)</label></label>
                     <div class="col-sm-5">
                         <input type="text" class="form-control" name="asal_kota" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-4 col-form-label">Tanggal Daftar <label
+                            style='color:red;'>(*)</label></label>
+                    <div class="col-sm-5">
+                        <input type="date" class="form-control" name="tanggal_daftar" value='{{ date("Y-m-d") }}'
+                            required>
                     </div>
                 </div>
                 <div class="row mb-3">

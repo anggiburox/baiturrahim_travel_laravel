@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileAdmin;
 use App\Http\Controllers\PaketUmrahControllers;
 use App\Http\Controllers\JamaahControllers;
 use App\Http\Controllers\KeberangkatanControllers;
+use App\Http\Controllers\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,10 @@ use App\Http\Controllers\KeberangkatanControllers;
 |
 */
 
-Route::get('/', function () {
-    return view('layout/admin');
-});
+
+Route::post('/login', [Auth::class, 'login']);
+Route::get('/logout', [Auth::class, 'logout']);
+Route::get('/', [Auth::class, 'index'])->name('login');
 
 
 Route::get('/admin/profile', [ProfileAdmin::class, 'index']);

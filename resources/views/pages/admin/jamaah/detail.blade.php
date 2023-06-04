@@ -155,11 +155,14 @@
                             <div class="row mb-3">
                                 <label for="Linkedin" class="col-md-4 col-lg-4 col-form-label">Bukti Dokumentasi</label>
                                 <div class="col-md-8 col-lg-8">
+                                    @if ($pp->Bukti_Dokumentasi)
                                     <a href="/admin/jamaah/downloadfile/{{$pp->Bukti_Dokumentasi}}">{{$pp->Bukti_Dokumentasi}}
                                         <i class='bi bi-file-earmark-arrow-down'></i></a>
+                                    @else
+                                    File tidak tersedia
+                                    @endif
                                 </div>
                             </div>
-
 
                             <div class="col-12">
                                 <a href="/admin/jamaah" class="btn btn-secondary"><i class='bi bi-x-circle'></i>&nbsp;
