@@ -163,6 +163,26 @@
                                     @endif
                                 </div>
                             </div>
+                            @foreach($user as $user)
+                            <input type="hidden" name="ID_User" value="{{ $user->ID_User}}">
+                            <div class="row mb-3">
+                                <label for="Linkedin" class="col-md-4 col-lg-4 col-form-label">Username <label
+                                        style='color:red;'>(*)</label></label>
+                                <div class="col-md-8 col-lg-8">
+                                    <input type="text" class="form-control" name="username" value='{{$user->Username}}'
+                                        required readonly style='background:#e6e6fa;'>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="Linkedin" class="col-md-4 col-lg-4 col-form-label">Password </label>
+                                <div class="col-md-8 col-lg-8">
+                                    <input type="text" class="form-control" name="password" readonly
+                                        value='{{$user->Password}}' style='background:#e6e6fa;'>
+                                </div>
+                            </div>
+                            @endforeach
+
 
                             <div class="col-12">
                                 <a href="/admin/jamaah" class="btn btn-secondary"><i class='bi bi-x-circle'></i>&nbsp;

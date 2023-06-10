@@ -11,25 +11,10 @@ class UsersModel extends Model
     use HasFactory;
 
     protected $table='users';  
-    protected $fillable=['ID_User','ID_Perawat','ID_Dokter','ID_Pasien','ID_Kasir','Username','Password','ID_User_Roles'];  
+    protected $fillable=['ID_User','ID_Jamaah','Username','Password','ID_User_Roles'];  
     public $timestamps = false;
     public $incrementing = false;
     protected $primaryKey = 'ID_User';
-
-    public static function fetchUserJoinPegawai($id)
-    {   
-        $brng =  DB::table('users')
-        ->join('pegawai', 'pegawai.ID_Pegawai', '=', 'users.ID_Pegawai')
-        ->where('users.ID_User', $id)
-        ->get();
-        return $brng;
-    }
-    public static function isUniqueUsername($username, $id)
-{
-    return !static::where('username', $username)
-            ->where('ID_User', '<>', $id)
-            ->exists();
-}
     
     public static function fetchusers($id)
     {
@@ -39,86 +24,29 @@ class UsersModel extends Model
         return $brng;
     }
 
-    public static function fetchjoinpasien($id)
-    {
-        $brng =  DB::table('users')
-        ->join('pasien', 'pasien.ID_Pasien', '=', 'users.ID_Pasien')
-        ->where('ID_User',$id)
-        ->first();
-        return $brng;
-    }
-
-    public static function fetchUserJoinPeasien($id)
+    public static function fetchUser($id)
     {   
         $brng =  DB::table('users')
-        ->join('pasien', 'pasien.ID_Pasien', '=', 'users.ID_Pasien')
-        ->where('users.ID_User', $id)
+        ->where('users.Username', $id)
         ->get();
         return $brng;
     }
-    
 
-    public static function fetchjoinpasienleftjoin($id)
-    {
-        $brng =  DB::table('users')
-        ->leftJoin('pasien', 'pasien.ID_Pasien', '=', 'users.ID_Pasien')
-        ->where('ID_User',$id)
-        ->first();
-        return $brng;
-    }
-    
-
-    public static function fetchjoinperawat($id)
-    {
-        $brng =  DB::table('users')
-        ->join('perawat', 'perawat.ID_Perawat', '=', 'users.ID_Perawat')
-        ->where('ID_User',$id)
-        ->first();
-        return $brng;
-    }
-
-    public static function fetchUserJoinPerawat($id)
+    public static function fetchUserJamaah($id)
     {   
         $brng =  DB::table('users')
-        ->join('perawat', 'perawat.ID_Perawat', '=', 'users.ID_Perawat')
+        ->join('jamaah', 'jamaah.ID_Jamaah', '=', 'users.ID_Jamaah')
         ->where('users.ID_User', $id)
         ->get();
         return $brng;
     }
 
-    public static function fetchjoindokter($id)
-    {
-        $brng =  DB::table('users')
-        ->join('dokter', 'dokter.ID_Dokter', '=', 'users.ID_Dokter')
-        ->where('ID_User',$id)
-        ->first();
-        return $brng;
-    }
-    
-    public static function fetchUserJoinDokter($id)
+    public static function fetchUserJoinJamaah($id)
     {   
         $brng =  DB::table('users')
-        ->join('dokter', 'dokter.ID_Dokter', '=', 'users.ID_Dokter')
+        ->join('jamaah', 'jamaah.ID_Jamaah', '=', 'users.ID_Jamaah')
         ->where('users.ID_User', $id)
-        ->get();
-        return $brng;
-    }
-
-    public static function fetchjoinkasir($id)
-    {
-        $brng =  DB::table('users')
-        ->join('kasir', 'kasir.ID_Kasir', '=', 'users.ID_Kasir')
-        ->where('ID_User',$id)
         ->first();
-        return $brng;
-    }
-
-    public static function fetchUserJoinKasir($id)
-    {   
-        $brng =  DB::table('users')
-        ->join('kasir', 'kasir.ID_Kasir', '=', 'users.ID_Kasir')
-        ->where('users.ID_User', $id)
-        ->get();
         return $brng;
     }
 }

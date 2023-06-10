@@ -16,6 +16,7 @@ class DashboardAdmin extends Controller
      */    
     public function index()
     {   
+
         $paket = PaketUmrahModel::count();
         $jamaah = JamaahModel::count();
 

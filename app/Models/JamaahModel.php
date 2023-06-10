@@ -16,14 +16,31 @@ class JamaahModel extends Model
     public $incrementing = false;
     protected $primaryKey = 'ID_Jamaah';
 
-
-    public static function fetchdata($id){
-        // Jika ID materi tidak diberikan, ambil semua data materi
-        if ($id == null) {
-            return JamaahModel::all();
+    public static function kode()
+    {
+        $kode = DB::table('jamaah')->max('ID_Jamaah');
+        $addNol = '';
+        $kode = str_replace("IJA-", "", $kode);
+        $kode = (int) $kode + 1;
+        $incrementKode = $kode;
+    
+        if (strlen($kode) == 1) {
+            $addNol = "000";
+        } elseif (strlen($kode) == 2) {
+            $addNol = "00";
+        } elseif (strlen($kode == 3)) {
+            $addNol = "0";
         }
     
-        // Ambil data materi berdasarkan ID
-        // return JamaahModel::where('ID_Jamaah', $id)->first();
-        }
+        $kodeBaru = "IJA-".$addNol.$incrementKode;
+        return $kodeBaru;
+    }
+
+    public static function userjoinjamaahwhere($id){
+        $brng =  DB::table('users')
+        ->join('jamaah', 'jamaah.ID_Jamaah', '=', 'users.ID_Jamaah')
+        ->where('users.ID_Jamaah',$id)
+        ->get();
+        return $brng;
+    }   
 }

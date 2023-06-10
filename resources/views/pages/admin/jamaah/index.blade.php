@@ -19,7 +19,6 @@
                             <i class="bi bi-plus-lg" aria-hidden="true"></i>&nbsp;
                             Tambah data
                         </a>
-                        <a href="jamaah/cetak_pdf" class="btn btn-primary" target="_blank">CETAK PDF</a>
                     </h5>
 
                     <!-- Table with stripped rows -->
@@ -62,6 +61,10 @@
                                     <a href="jamaah/detail/{{ $p->ID_Jamaah}}" data-toggle="tooltip"
                                         data-placement="top" title="Perbaharui" class="btn mb-1 btn-info btn-sm"
                                         type="button"><i class="bi bi-eye-fill"></i>&nbsp; Detail</a>
+                                    |
+                                    <a href="jamaah/cetak_pdf_satuan/{{ $p->ID_Jamaah}}"
+                                        class="btn mb-1 btn-secondary btn-sm" data-toggle="tooltip" data-placement="top"
+                                        title="Cetak" type="button"><i class="bi bi-printer-fill"></i>&nbsp; Cetak</a>
                                     |
                                     <a href="jamaah/hapus/{{ $p->ID_Jamaah}}" class="delete btn mb-1 btn-danger btn-sm"
                                         onclick="showConfirmation(event)" data-toggle="tooltip" data-placement="top"

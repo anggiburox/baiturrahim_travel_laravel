@@ -18,11 +18,11 @@
                 method="POST">
                 {{ csrf_field() }}
                 <div class="row mb-3">
-                    <label for="inputText" class="col-sm-3 col-form-label">ID Keberangkatan <label
+                    <label for="inputText" class="col-sm-3 col-form-label">Kode Keberangkatan <label
                             style='color:red;'>(*)</label></label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" name="id_keberangkatan"
-                            value="{{$pp->ID_Keberangkatan}}" required readonly style="background-color:#e6e6fa;">
+                        <input type="text" class="form-control" name="kode" value="{{$pp->Kode_Keberangkatan}}" required
+                            readonly style="background-color:#e6e6fa;">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -49,13 +49,12 @@
                     <label for="inputText" class="col-sm-3 col-form-label">NIK <label
                             style='color:red;'>(*)</label></label>
                     <div class="col-sm-3">
-                        <select name='id_jamaah' id="myselect2" class='form-control' onchange="showjamaah()" required>
+                        <select name='id_jamaah[]' id="myselect2" class='form-control' onchange="showjamaah()" required
+                            multiple="multiple">>
                             <option value="">-- Pilih Data Jamaah --</option>
                             @foreach($jamaah as $jmh)
                             <option value="{{ $jmh->ID_Jamaah }}" data-nama='{{$jmh->Nama_Jamaah}}'
-                                data-tempat='{{$jmh->Tempat_Lahir}}'
-                                data-tanggal='{{ \Carbon\Carbon::parse($jmh->Tanggal_Keberangkatan)->isoFormat("D MMMM Y") }}'
-                                data-alamat='{{$jmh->Alamat}}'>
+                                data-telepon='{{$jmh->Nomor_Telepon}}' data-alamat='{{$jmh->Alamat}}'>
                                 {{ $jmh->NIK}}
                             </option>
                             @endforeach
@@ -63,15 +62,13 @@
                     </div>
                     <label for="inputText" class="col-sm-3 col-form-label">Nama Jamaah</label>
                     <div class="col-sm-3">
-                        <input type='text' class='form-control' id='nama_jamaah' value='' readonly
-                            style='background:#e6e6fa;'>
+                        <textarea id='nama_jamaah' readonly style='background:#e6e6fa;' class='form-control'></textarea>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="inputText" class="col-sm-3 col-form-label">Tempat, Tanggal Lahir</label>
+                    <label for="inputText" class="col-sm-3 col-form-label">Nomor Telepon</label>
                     <div class="col-sm-3">
-                        <input type='text' class='form-control' id='tempat_tanggal_lahir' value='' readonly
-                            style='background:#e6e6fa;'>
+                        <textarea id='telepon' readonly style='background:#e6e6fa;' class='form-control'></textarea>
                     </div>
                     <label for="inputText" class="col-sm-3 col-form-label">Alamat</label>
                     <div class="col-sm-3">
@@ -112,19 +109,30 @@
 <script>
 $('#myselect').select2({});
 
+$('#myselect2').select2({});
 
 function showConfirmation() {
-    swal({
-        title: "Konfirmasi",
-        text: "Apakah Anda yakin memperbaharui data ini?",
-        icon: "warning",
-        buttons: ["Batal", "Ya"],
-        dangerMode: true,
-    }).then((confirm) => {
-        if (confirm) {
-            document.getElementById('form-perbaharui').submit();
-        }
-    });
+    // Menjalankan validasi form sebelum menampilkan konfirmasi
+    if (document.getElementById('form-perbaharui').checkValidity()) {
+        swal({
+            title: "Konfirmasi",
+            text: "Apakah Anda yakin memperbaharui data ini?",
+            icon: "warning",
+            buttons: ["Batal", "Ya"],
+            dangerMode: true,
+        }).then((confirm) => {
+            if (confirm) {
+                document.getElementById('form-perbaharui').submit();
+            }
+        });
+    } else {
+        // Menampilkan pesan error jika validasi form gagal
+        swal({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Harap lengkapi semua kolom yang diperlukan!',
+        });
+    }
 }
 
 function updateHargaPaket() {
@@ -139,21 +147,48 @@ function updateHargaPaket() {
 }
 
 function showjamaah() {
+    // var select = document.getElementById("myselect2");
+    // var selectedOption = select.options[select.selectedIndex];
+    // var namajamaah = selectedOption.dataset.nama;
+    // var tempatlahir = selectedOption.dataset.tempat;
+    // var tgllahir = selectedOption.dataset.tanggal;
+    // var alamat = selectedOption.dataset.alamat;
+    // if (namajamaah && tempatlahir && tgllahir && alamat) {
+    //     document.getElementById("nama_jamaah").value = namajamaah;
+    //     document.getElementById("tempat_tanggal_lahir").value = tempatlahir + ", " + tgllahir;
+    //     document.getElementById("alamat").value = alamat;
+    // } else {
+    //     document.getElementById("nama_jamaah").value = "";
+    //     document.getElementById("tempat_tanggal_lahir").value = "";
+    //     document.getElementById("alamat").value = "";
+    // }
+
     var select = document.getElementById("myselect2");
-    var selectedOption = select.options[select.selectedIndex];
-    var namajamaah = selectedOption.dataset.nama;
-    var tempatlahir = selectedOption.dataset.tempat;
-    var tgllahir = selectedOption.dataset.tanggal;
-    var alamat = selectedOption.dataset.alamat;
-    if (namajamaah && tempatlahir && tgllahir && alamat) {
-        document.getElementById("nama_jamaah").value = namajamaah;
-        document.getElementById("tempat_tanggal_lahir").value = tempatlahir + ", " + tgllahir;
-        document.getElementById("alamat").value = alamat;
-    } else {
-        document.getElementById("nama_jamaah").value = "";
-        document.getElementById("tempat_tanggal_lahir").value = "";
-        document.getElementById("alamat").value = "";
+    var selectedOptions = select.selectedOptions;
+    var namajamaah = '';
+    var teleponjamaah = '';
+    var alamat = '';
+
+    for (var i = 0; i < selectedOptions.length; i++) {
+        var selectedOption = selectedOptions[i];
+        var nama = selectedOption.getAttribute('data-nama');
+        var telepon = selectedOption.getAttribute('data-telepon');
+        var alamat2 = selectedOption.getAttribute('data-alamat');
+
+        namajamaah += nama + ', ';
+        teleponjamaah += telepon + ', ';
+        alamat += alamat2 + ', ';
     }
+
+    if (namajamaah.length > 0) {
+        namajamaah = namajamaah.slice(0, -2); // Remove the trailing comma and space
+        teleponjamaah = teleponjamaah.slice(0, -2);
+        alamat = alamat.slice(0, -2);
+    }
+
+    document.getElementById("nama_jamaah").value = namajamaah;
+    document.getElementById("telepon").value = teleponjamaah;
+    document.getElementById("alamat").value = alamat;
 }
 </script>
 @endsection

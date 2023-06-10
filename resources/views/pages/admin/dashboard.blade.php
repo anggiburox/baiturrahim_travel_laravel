@@ -91,6 +91,7 @@
                                                 <td>{{ date('M', mktime(0, 0, 0, $data->bulan)) }}</td>
                                                 <td>{{ date('Y', mktime(0, 0, 0, 1, 1, $data->tahun)) }}</td>
                                                 <td>{{ $data->total }}</td>
+                                                <td></td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -128,7 +129,7 @@
                 </div>
             </div>
             <!-- End Left side columns -->
-        </div>        
+        </div>
     </div>
 </section>
 @endsection

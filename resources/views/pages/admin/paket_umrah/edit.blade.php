@@ -60,17 +60,27 @@
 
 <script>
 function showConfirmation() {
-    swal({
-        title: "Konfirmasi",
-        text: "Apakah Anda yakin memperbaharui data ini?",
-        icon: "warning",
-        buttons: ["Batal", "Ya"],
-        dangerMode: true,
-    }).then((confirm) => {
-        if (confirm) {
-            document.getElementById('form-perbaharui').submit();
-        }
-    });
+    // Menjalankan validasi form sebelum menampilkan konfirmasi
+    if (document.getElementById('form-perbaharui').checkValidity()) {
+        swal({
+            title: "Konfirmasi",
+            text: "Apakah Anda yakin memperbaharui data ini?",
+            icon: "warning",
+            buttons: ["Batal", "Ya"],
+            dangerMode: true,
+        }).then((confirm) => {
+            if (confirm) {
+                document.getElementById('form-perbaharui').submit();
+            }
+        });
+    } else {
+        // Menampilkan pesan error jika validasi form gagal
+        swal({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Harap lengkapi semua kolom yang diperlukan!',
+        });
+    }
 }
 
 var hargaObatInput = document.querySelector('input[name=harga_paket_umrah]');
@@ -84,4 +94,5 @@ hargaObatInput.addEventListener('input', function(evt) {
     });
 });
 </script>
+
 @endsection

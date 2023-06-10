@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.jamaah')
 
 @section('content')
 <div class="pagetitle">
@@ -50,7 +50,7 @@
 
                         @foreach($pgw as $pp)
                         <!-- Profile Edit Form -->
-                        <form class="row g-3 needs-validation" id="form-perbaharui" action="/admin/jamaah/update"
+                        <form class="row g-3 needs-validation" id="form-perbaharui" action="/jamaah/profile/editprofile"
                             method="POST" enctype="multipart/form-data">
 
                             {{ csrf_field() }}
@@ -204,13 +204,12 @@
                                 </div>
                             </div>
 
-                            @foreach($user as $user)
-                            <input type="hidden" name="ID_User" value="{{ $user->ID_User}}">
+                            <input type="hidden" name="ID_User" value="{{ $pp->ID_User}}">
                             <div class="row mb-3">
                                 <label for="Linkedin" class="col-md-4 col-lg-4 col-form-label">Username <label
                                         style='color:red;'>(*)</label></label>
                                 <div class="col-md-8 col-lg-8">
-                                    <input type="text" class="form-control" name="username" value='{{$user->Username}}'
+                                    <input type="text" class="form-control" name="username" value='{{$pp->Username}}'
                                         required>
                                 </div>
                             </div>
@@ -218,17 +217,22 @@
                             <div class="row mb-3">
                                 <label for="Linkedin" class="col-md-4 col-lg-4 col-form-label">Password </label>
                                 <div class="col-md-8 col-lg-8">
-                                    <input type="password" class="form-control" name="password">
+                                    <div class="input-group mb-3">
+                                        <input type="password" class="form-control" name="password" id="password"
+                                            required value="{{ $pp->Password}}">
+                                        <span class="input-group-text" id="basic-addon1" onclick="showPassword()">Show
+                                            Password</span>
+                                    </div>
                                 </div>
                             </div>
-                            @endforeach
 
 
                             <div class="col-12">
                                 <button class="btn btn-success" type="button" onclick="showConfirmation()"><i
                                         class='bi bi-check-circle'></i>&nbsp;
                                     Perbaharui</button>
-                                <a href="/admin/jamaah" class="btn btn-secondary"><i class='bi bi-x-circle'></i>&nbsp;
+                                <a href="/jamaah/dashboard" class="btn btn-secondary"><i
+                                        class='bi bi-x-circle'></i>&nbsp;
                                     Kembali</a>
                             </div>
                         </form><!-- End Profile Edit Form -->
@@ -243,6 +247,15 @@
 </div>
 
 <script>
+function showPassword() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
+
 function showConfirmation() {
     // Menjalankan validasi form sebelum menampilkan konfirmasi
     if (document.getElementById('form-perbaharui').checkValidity()) {
@@ -268,6 +281,12 @@ function showConfirmation() {
 }
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@if(Session::has('success'))
+<script>
+swal("Sukses", "{{ Session::get('success') }}", "success");
+</script>
+@endif
+
 @if(Session::has('errors'))
 <script>
 swal("Warning", "{{ Session::get('errors') }}", "warning");

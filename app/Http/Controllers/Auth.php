@@ -32,7 +32,7 @@ class Auth extends Controller
             // jika username ditemukan
             // update data users
             DB::table('users')->where('Username',$request->username)->update([
-                'Password' =>  bcrypt($request->input('password')),
+                'Password' =>  $request->input('password'),
             ]);
             // alihkan halaman ke halaman lupa_password
             return redirect('/')->withSuccess('Password berhasil diperbarui');
@@ -65,17 +65,17 @@ class Auth extends Controller
                     return redirect()->back()->with('error', 'Password salah!');
                 }
             } else if ($role == 2) {
-                $pasien = UsersModel::fetchjoinpasien($user->ID_User);
-                if (password_verify($post['password'], $user->Password)) {
+                $jamaah = UsersModel::fetchUserJoinJamaah($user->ID_User);
+                if ($post['password'] == $user->Password) {
                     $params = [
                         'islogin'   => true,
                         'id_user'     => $user->ID_User,
-                        'username'     => $pasien->Username,
-                        'password' =>$pasien->Password,
-                        'nama_jamaah'     => $pasien->Nama_Jamaah,
-                        'alamat_jamaah'     => $pasien->Alamat,
-                        'nik'     => $pasien->NIK,
-                        'role'      => $pasien->ID_User_Roles
+                        'username'     => $jamaah->Username,
+                        'password' =>$jamaah->Password,
+                        'nik'     => $jamaah->NIK,
+                        'nama_jamaah'     => $jamaah->Nama_Jamaah,
+                        'alamat_jamaah'     => $jamaah->Alamat,
+                        'role'      => $jamaah->ID_User_Roles
                     ];          
                     $request->session()->put($params);
                     return redirect()->to('/jamaah/dashboard');

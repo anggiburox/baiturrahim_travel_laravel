@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.jamaah')
 
 @section('content')
 <div class="pagetitle">
@@ -15,10 +15,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a class="btn btn-success" href="keberangkatan/tambah">
-                            <i class="bi bi-plus-lg" aria-hidden="true"></i>&nbsp;
-                            Tambah data
-                        </a>
+
                     </h5>
 
                     <!-- Table with stripped rows -->
@@ -31,7 +28,7 @@
                                 <th scope="col">Nama - Harga Paket Umrah</th>
                                 <th scope="col">Tanggal Keberangkatan</th>
                                 <th scope="col">Titik Kumpul</th>
-                                <th scope="col">Aksi</th>
+                                <th scope="col">Cetak</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,25 +45,12 @@
                                 <td>{{ \Carbon\Carbon::parse($p->Tanggal_Keberangkatan)->isoFormat('D MMMM Y') }}</td>
                                 <td>{{$p->Titik_Kumpul}}</td>
                                 <td>
-                                    <a href="keberangkatan/edit/{{ $p->Kode_Keberangkatan}}" data-toggle="tooltip"
-                                        data-placement="top" title="Perbaharui" class="btn mb-1 btn-primary"
-                                        type="button"><i class="ri-edit-box-line"></i>&nbsp; Edit</a>
-                                    |
-                                    <a href="keberangkatan/detail/{{ $p->Kode_Keberangkatan}}" data-toggle="tooltip"
-                                        data-placement="top" title="Perbaharui" class="btn mb-1 btn-info btn-sm"
-                                        type="button"><i class="bi bi-eye-fill"></i>&nbsp; Detail</a>
-                                    |
-                                    <a href="keberangkatan/cetak_pdf_satuan/{{ $p->Kode_Keberangkatan}}"
-                                        class="btn mb-1 btn-secondary btn-sm" data-toggle="tooltip" data-placement="top"
+                                    <a href="cetak_pdf_satuan/{{$p->ID_Keberangkatan}}"
+                                        class="btn mb-1 btn-success btn-sm" data-toggle="tooltip" data-placement="top"
                                         title="Cetak" type="button"><i class="bi bi-printer-fill"></i>&nbsp; Cetak</a>
-                                    |
-                                    <a href="keberangkatan/hapus/{{ $p->Kode_Keberangkatan}}"
-                                        class="delete btn mb-1 btn-danger" onclick="showConfirmation(event)"
-                                        data-toggle="tooltip" data-placement="top" title="Hapus" type="button"><i
-                                            class="bi bi-trash-fill"></i>&nbsp; Hapus</a>
                                 </td>
+                                @endforeach
                             </tr>
-                            @endforeach
                         </tbody>
                     </table>
                     <!-- End Table with stripped rows -->

@@ -184,6 +184,10 @@ return [
 
         Barryvdh\DomPDF\ServiceProvider::class,
 
+        //image
+        Intervention\Image\ImageServiceProvider::class,
+
+
         /*
          * Package Service Providers...
          */
@@ -213,6 +217,10 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'ImageCache' => Intervention\Image\Facades\ImageCache::class,
+
+
     ])->toArray(),
 
 ];

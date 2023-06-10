@@ -16,6 +16,7 @@
             <form class="row g-3 needs-validation" action="/admin/jamaah/store" method="POST"
                 enctype="multipart/form-data">
                 {{ csrf_field() }}
+                <input type="hidden" class="form-control" name="id_jamaah" value="{{$kode}}">
                 <div class="row mb-3">
                     <label for="inputText" class="col-sm-4 col-form-label">NIK <label
                             style='color:red;'>(*)</label></label>
@@ -135,6 +136,21 @@
                     <label for="inputText" class="col-sm-4 col-form-label">Bukti Dokumentasi</label>
                     <div class="col-sm-5">
                         <input type="file" class="form-control" name="bukti_dokumentasi">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-4 col-form-label select2">Username <label
+                            style='color:red;'>(*)</label></label>
+                    <div class="col-sm-5">
+                        <input type='text' name='username' class='form-control' required>
+                    </div>
+
+                </div>
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-4 col-form-label">Password <label
+                            style='color:red;'>(*)</label></label>
+                    <div class="col-sm-5">
+                        <input type="password" class="form-control" name="password" required>
                     </div>
                 </div>
                 <div class="col-12">

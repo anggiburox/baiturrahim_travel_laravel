@@ -6,8 +6,6 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
     <title>Baiturrahim Travel</title>
-
-    <link href="{{asset('assets/logo/logo.png') }}" rel="shortcut icon">
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
@@ -24,7 +22,7 @@
     <!-- Vendor CSS Files -->
     <link href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet" />
-    <link href="{{asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet" />
+    <link href="{{asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet" />
     <link href="{{asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet" />
     <!-- <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet" /> -->
     <!-- <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet" /> -->
@@ -37,9 +35,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
     <!-- =======================================================
-  * Template Name: NiceAdmin
+  * Template Name: Nicejamaah
   * Updated: Mar 09 2023 with Bootstrap v5.2.3
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Template URL: https://bootstrapmade.com/nice-jamaah-bootstrap-jamaah-html-template/
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
@@ -49,8 +47,8 @@
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center" style='background:#0b381a;'>
         <div class="d-flex align-items-center justify-content-between">
-            <a href="/admin/dashboard" class="logo d-flex align-items-center">
-                <img src="assets/logo/logo.png" alt="" />
+            <a href="/jamaah/dashboard" class="logo d-flex align-items-center">
+                <img src="assets/img/logo.png" alt="" />
                 <span class="d-none d-lg-block" style="color:white;">Baiturrahim Travel</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn" style='color:white;'></i>
@@ -73,7 +71,17 @@
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6>{{ session('username') }}</h6>
+                            <h6>Halo {{ session('nama_jamaah') }}</h6>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" href="/jamaah/profile">
+                                <i class="bi bi-person"></i>
+                                <span>My Profile</span>
+                            </a>
                         </li>
                         <li>
                             <hr class="dropdown-divider" />
@@ -99,34 +107,12 @@
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/admin/dashboard">
+                <a class="nav-link collapsed" href="/jamaah/dashboard">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             <!-- End Dashboard Nav -->
-
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/admin/paket_umrah">
-                    <i class="bi bi-menu-button-wide"></i>
-                    <span>Paket Umrah</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/admin/jamaah">
-                    <i class="bi bi-person"></i>
-                    <span>Jamaah</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/admin/keberangkatan">
-                    <i class="ri-plane-fill"></i>
-                    <span>Keberangkatan</span>
-                </a>
-            </li>
         </ul>
     </aside>
     <!-- End Sidebar-->
@@ -136,7 +122,7 @@
     </main>
     <!-- End #main -->
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center" style='background:#0b381a;'><i
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
