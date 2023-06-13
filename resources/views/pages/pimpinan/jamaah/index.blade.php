@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.pimpinan')
 
 @section('content')
 <div class="pagetitle">
@@ -15,10 +15,6 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a class="btn btn-success" href="jamaah/tambah">
-                            <i class="bi bi-plus-lg" aria-hidden="true"></i>&nbsp;
-                            Tambah data
-                        </a>
                     </h5>
 
                     <!-- Table with stripped rows -->
@@ -32,7 +28,8 @@
                                 <th scope="col">Tempat, Tanggal Lahir</th>
                                 <th scope="col">Jenis Kelamin</th>
                                 <th scope="col">Foto Jamaah</th>
-                                <th scope="col">Aksi</th>
+                                <th scope="col">Detail</th>
+                                <th scope="col">Cetak</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,21 +51,16 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="jamaah/edit/{{ $p->ID_Jamaah}}" data-toggle="tooltip" data-placement="top"
-                                        title="Perbaharui" class="btn mb-1 btn-primary btn-sm" type="button"><i
-                                            class="ri-edit-box-line"></i>&nbsp; Edit</a>
-                                    |
                                     <a href="jamaah/detail/{{ $p->ID_Jamaah}}" data-toggle="tooltip"
                                         data-placement="top" title="Detail" class="btn mb-1 btn-info btn-sm"
-                                        type="button"><i class="bi bi-eye-fill"></i>&nbsp; Detail</a>
-                                    |
+                                        type="button"><i class="bi bi-eye-fill"></i>&nbsp; Detail
+                                    </a>
+                                </td>
+                                <td>
                                     <a href="jamaah/cetak_pdf_satuan/{{ $p->ID_Jamaah}}"
-                                        class="btn mb-1 btn-secondary btn-sm" data-toggle="tooltip" data-placement="top"
-                                        title="Cetak" type="button"><i class="bi bi-printer-fill"></i>&nbsp; Cetak</a>
-                                    |
-                                    <a href="jamaah/hapus/{{ $p->ID_Jamaah}}" class="delete btn mb-1 btn-danger btn-sm"
-                                        onclick="showConfirmation(event)" data-toggle="tooltip" data-placement="top"
-                                        title="Hapus" type="button"><i class="bi bi-trash-fill"></i>&nbsp; Hapus</a>
+                                        class="btn mb-1 btn-success btn-sm" data-toggle="tooltip" data-placement="top"
+                                        title="Cetak" type="button"><i class="bi bi-printer-fill"></i>&nbsp; Cetak
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach

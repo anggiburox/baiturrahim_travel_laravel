@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2023 at 07:54 AM
+-- Generation Time: Jun 13, 2023 at 03:02 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.0.23
 
@@ -97,14 +97,14 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(17, '2014_10_12_000000_create_users_table', 1),
-(18, '2014_10_12_100000_create_password_resets_table', 1),
-(19, '2019_08_19_000000_create_failed_jobs_table', 1),
-(20, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(21, '2023_05_24_012911_create_paket_umrah_table', 1),
-(22, '2023_05_24_093120_create_jamaah_table', 1),
-(23, '2023_05_28_150505_create_keberangkatan_table', 1),
-(24, '2023_06_04_013222_create_users_roles_table', 1);
+(25, '2014_10_12_000000_create_users_table', 1),
+(26, '2014_10_12_100000_create_password_resets_table', 1),
+(27, '2019_08_19_000000_create_failed_jobs_table', 1),
+(28, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(29, '2023_05_24_012911_create_paket_umrah_table', 1),
+(30, '2023_05_24_093120_create_jamaah_table', 1),
+(31, '2023_05_28_150505_create_keberangkatan_table', 1),
+(32, '2023_06_04_013222_create_users_roles_table', 1);
 
 -- --------------------------------------------------------
 
@@ -172,7 +172,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`ID_User`, `ID_Jamaah`, `Username`, `Password`, `ID_User_Roles`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'admin', 'travel', 1, NULL, NULL);
+(1, NULL, 'admin', 'travel', 1, NULL, NULL),
+(2, NULL, 'pimpinan', 'pimpinan123', 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -193,7 +194,8 @@ CREATE TABLE `users_roles` (
 
 INSERT INTO `users_roles` (`ID_User_Roles`, `Role`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', NULL, NULL),
-(2, 'Jamaah', NULL, NULL);
+(2, 'Jamaah', NULL, NULL),
+(3, 'Pimpinan', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -276,7 +278,7 @@ ALTER TABLE `keberangkatan`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -288,13 +290,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID_User` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_User` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users_roles`
 --
 ALTER TABLE `users_roles`
-  MODIFY `ID_User_Roles` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_User_Roles` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

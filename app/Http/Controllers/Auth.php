@@ -82,7 +82,26 @@ class Auth extends Controller
                 } else {
                     return redirect()->back()->with('error', 'Password salah!');
                 }
-            } 
+            } else if ($user) {
+                if ($role == 3) {
+                    $tutor = UsersModel::fetchusers($user->ID_User);
+                    if ($post['password'] == $user->Password) {
+                        $params = [
+                            'islogin'   => true,
+                            'username'     => $tutor->Username,
+                            'password' =>$tutor->Password,
+                            'id_user'     => $user->ID_User,
+                            'role'      => $tutor->ID_User_Roles
+                        ];
+                        $request->session()->put($params);
+                        if ($role == 3) {
+                            return redirect()->to('/pimpinan/dashboard');
+                        } 
+                    } else { 
+                        return redirect()->back()->with('error', 'Password salah!');
+                    }
+                }
+            }
             }else{
                 return redirect()->back()->with('error', 'Username salah!');
             }

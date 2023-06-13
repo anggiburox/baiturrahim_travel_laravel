@@ -49,7 +49,7 @@
                     <div class="col-sm-3">
                         <select name='id_jamaah[]' id="myselect2" class='form-control' onchange=showjamaah() required
                             multiple="multiple">
-                            <option value="">-- Pilih Data Jamaah --</option>
+                            <option value="" disabled>-- Pilih Data Jamaah --</option>
                             @foreach($jamaah as $jmh)
                             <option value="{{ $jmh->ID_Jamaah }}" data-nama='{{$jmh->Nama_Jamaah}}'
                                 data-tempat='{{$jmh->Tempat_Lahir}}'

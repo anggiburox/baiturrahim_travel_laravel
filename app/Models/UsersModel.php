@@ -32,6 +32,14 @@ class UsersModel extends Model
         return $brng;
     }
 
+    public static function fetchUserID($id)
+    {   
+        $brng =  DB::table('users')
+        ->where('users.ID_User', $id)
+        ->get();
+        return $brng;
+    }
+
     public static function fetchUserJamaah($id)
     {   
         $brng =  DB::table('users')

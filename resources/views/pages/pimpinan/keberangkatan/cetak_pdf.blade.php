@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Data Jamaah</title>
+    <title>Data Keberangkatan</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -14,7 +14,7 @@
     }
     </style>
     <center>
-        <h5>Data Jamaah</h5>
+        <h5>Data Keberangkatan</h5>
     </center>
 
     <table class='table table-bordered'>
