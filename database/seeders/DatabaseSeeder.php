@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             ['Username' => 'admin', 'Password' =>'travel', 'ID_User_Roles'=>'1'],
         ]);
 
-        DB::table('users_role')->insert([
+        DB::table('users_roles')->insert([
             ['Role' => 'Admin'],
             ['Role' => 'Jamaah'],
             ['Role' => 'Pimpinan'],
