@@ -227,29 +227,30 @@ class JamaahControllers extends Controller
 
 
 	// method untuk hapus data jamaah
-	public function hapus($id){
-			// Mendapatkan informasi file foto dan bukti dokumentasi sebelum menghapus data dari database
-			$jamaah = DB::table('jamaah')->select('Foto_Jamaah', 'Bukti_Dokumentasi')->where('ID_Jamaah', $id)->first();
-			$fotoJamaahPath = public_path('assets/Foto Jamaah/' . $jamaah->Foto_Jamaah);
-			$buktiDokumentasiPath = public_path('assets/Bukti Dokumentasi/' . $jamaah->Bukti_Dokumentasi);
-		
-			// Menghapus data jamaah berdasarkan ID yang dipilih
-			DB::table('jamaah')->where('ID_Jamaah', $id)->delete();
-			DB::table('users')->where('ID_Jamaah',$id)->delete();
-		
-			// Menghapus file foto jika file tersebut ada
-			if (file_exists($fotoJamaahPath)) {
-				unlink($fotoJamaahPath);
-			}
-			
-			// Menghapus file bukti dokumentasi jika file tersebut ada
-			if (file_exists($buktiDokumentasiPath)) {
-				unlink($buktiDokumentasiPath);
-			}
-			
-			// Alihkan halaman ke halaman jamaah
-			return redirect('/admin/jamaah')->withDanger('Data berhasil dihapus');
+	public function hapus($id) {
+		// Mendapatkan informasi file foto dan bukti dokumentasi sebelum menghapus data dari database
+		$jamaah = DB::table('jamaah')->select('Foto_Jamaah', 'Bukti_Dokumentasi')->where('ID_Jamaah', $id)->first();
+		$fotoJamaahPath = public_path('assets/Foto Jamaah/' . $jamaah->Foto_Jamaah);
+		$buktiDokumentasiPath = public_path('assets/Bukti Dokumentasi/' . $jamaah->Bukti_Dokumentasi);
+	
+		// Menghapus data jamaah berdasarkan ID yang dipilih
+		DB::table('jamaah')->where('ID_Jamaah', $id)->delete();
+		DB::table('users')->where('ID_Jamaah', $id)->delete();
+	
+		// Menghapus file foto jika file tersebut ada dan bukan null
+		if ($jamaah->Foto_Jamaah && file_exists($fotoJamaahPath)) {
+			unlink($fotoJamaahPath);
 		}
+	
+		// Menghapus file bukti dokumentasi jika file tersebut ada dan bukan null
+		if ($jamaah->Bukti_Dokumentasi && file_exists($buktiDokumentasiPath)) {
+			unlink($buktiDokumentasiPath);
+		}
+	
+		// Alihkan halaman ke halaman jamaah
+		return redirect('/admin/jamaah')->withDanger('Data berhasil dihapus');
+	}
+	
 		
 
 }
