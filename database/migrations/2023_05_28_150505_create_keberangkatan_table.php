@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('ID_Paket_Umrah', 50);
             $table->date('Tanggal_Keberangkatan');
             $table->text('Titik_Kumpul');
+            $table->date('Tanggal_Kepulangan');
+            $table->text('Keterangan');
             $table->timestamps();
         });
     }

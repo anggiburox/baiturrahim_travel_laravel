@@ -34,6 +34,7 @@
                             <option value="">-- Pilih Data Paket --</option>
                             @foreach($paket as $pkt)
                             <option value="{{ $pkt->ID_Paket_Umrah }}"
+                                {{ $pkt->ID_Paket_Umrah == $pp->ID_Paket_Umrah ? 'selected' : '' }}
                                 data-harga="Rp. {{ number_format($pkt->Harga_Paket_Umrah, 0, ',', '.') }}">
                                 {{ $pkt->Nama_Paket_Umrah}}</option>
                             @endforeach
@@ -50,7 +51,7 @@
                             style='color:red;'>(*)</label></label>
                     <div class="col-sm-3">
                         <select name='id_jamaah[]' id="myselect2" class='form-control' onchange="showjamaah()" required
-                            multiple="multiple">>
+                            multiple="multiple">
                             <option value="">-- Pilih Data Jamaah --</option>
                             @foreach($jamaah as $jmh)
                             <option value="{{ $jmh->ID_Jamaah }}" data-nama='{{$jmh->Nama_Jamaah}}'
@@ -83,12 +84,23 @@
                         <input type="date" class="form-control" name="tanggal_keberangkatan"
                             value='{{$pp->Tanggal_Keberangkatan}}' required>
                     </div>
+                    <label for="inputText" class="col-sm-3 col-form-label">Tanggal Kepulangan <label
+                            style='color:red;'>(*)</label></label>
+                    <div class="col-sm-3">
+                        <input type="date" class="form-control" name="tanggal_kepulangan"
+                            value='{{$pp->Tanggal_Kepulangan}}' required>
+                    </div>
                 </div>
                 <div class="row mb-3">
                     <label for="inputText" class="col-sm-3 col-form-label">Titik Kumpul <label
                             style='color:red;'>(*)</label></label>
                     <div class="col-sm-3">
                         <textarea name="titik_kumpul" required class='form-control'>{{$pp->Titik_Kumpul}}</textarea>
+                    </div>
+                    <label for="inputText" class="col-sm-3 col-form-label">Keterangan <label
+                            style='color:red;'>(*)</label></label>
+                    <div class="col-sm-3">
+                        <textarea name="keterangan" required class='form-control'>{{$pp->Keterangan}}</textarea>
                     </div>
                 </div>
                 <div class="col-12">
@@ -134,7 +146,9 @@ function showConfirmation() {
         });
     }
 }
-
+document.addEventListener('DOMContentLoaded', function() {
+        updateHargaPaket();
+    });
 function updateHargaPaket() {
     var select = document.getElementById("myselect");
     var selectedOption = select.options[select.selectedIndex];
@@ -145,6 +159,7 @@ function updateHargaPaket() {
         document.getElementById("harga_paket").value = "";
     }
 }
+
 
 function showjamaah() {
     // var select = document.getElementById("myselect2");

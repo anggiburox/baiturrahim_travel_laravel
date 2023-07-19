@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         
         DB::table('users')->insert([
             ['Username' => 'admin', 'Password' =>'travel', 'ID_User_Roles'=>'1'],
+            ['Username' => 'pimpinan', 'Password' =>'pimpinan123', 'ID_User_Roles'=>'3'],
         ]);
 
         DB::table('users_roles')->insert([

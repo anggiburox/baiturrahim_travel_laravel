@@ -43,7 +43,9 @@ class KeberangkatanControllers extends Controller
 			'ID_Jamaah' => $id_jamaah,
 			'ID_Paket_Umrah' => $request->id_paket_umrah,
 			'Tanggal_Keberangkatan' => $request->tanggal_keberangkatan,
-			'Titik_Kumpul' => $request->titik_kumpul
+			'Titik_Kumpul' => $request->titik_kumpul,
+			'Tanggal_Kepulangan' => $request->tanggal_kepulangan,
+			'Keterangan' => $request->keterangan,
         ]);
     }
 
@@ -55,7 +57,7 @@ class KeberangkatanControllers extends Controller
 	{
 		// mengambil data keberangkatan berdasarkan id yang dipilih
 		$pgw = DB::table('keberangkatan')
-        ->select('Kode_Keberangkatan', 'Tanggal_Keberangkatan','Titik_Kumpul')
+        ->select('Kode_Keberangkatan', 'Tanggal_Keberangkatan','Titik_Kumpul','Tanggal_Kepulangan','Keterangan','ID_Paket_Umrah','ID_Jamaah')
         ->distinct()
         ->where('Kode_Keberangkatan', $id)
         ->get();
@@ -74,6 +76,10 @@ class KeberangkatanControllers extends Controller
 			'keberangkatan.ID_Paket_Umrah',
 			'keberangkatan.Tanggal_Keberangkatan',
 			'keberangkatan.Titik_Kumpul',
+			'keberangkatan.Tanggal_Kepulangan',
+			'keberangkatan.Keterangan',
+			'keberangkatan.Tanggal_Kepulangan',
+			'keberangkatan.Keterangan',
 			DB::raw('GROUP_CONCAT(DISTINCT keberangkatan.Kode_Keberangkatan SEPARATOR ", ") as Kode_Keberangkatan'),
 			DB::raw('GROUP_CONCAT(DISTINCT paket_umrah.Nama_Paket_Umrah SEPARATOR ", ") as Nama_Paket_Umrah'),
 			DB::raw('GROUP_CONCAT(jamaah.NIK SEPARATOR ", ") as NIK'),
@@ -82,7 +88,9 @@ class KeberangkatanControllers extends Controller
 			DB::raw('GROUP_CONCAT(jamaah.Alamat SEPARATOR ", ") as Alamat'),
 			DB::raw('GROUP_CONCAT(paket_umrah.Harga_Paket_Umrah SEPARATOR ", ") as Harga_Paket_Umrah')
 		)
-		->groupBy('keberangkatan.ID_Paket_Umrah', 'keberangkatan.Tanggal_Keberangkatan', 'keberangkatan.Titik_Kumpul')
+		->groupBy('keberangkatan.ID_Paket_Umrah', 'keberangkatan.Tanggal_Keberangkatan', 'keberangkatan.Titik_Kumpul',
+		'keberangkatan.Tanggal_Kepulangan',
+		'keberangkatan.Keterangan')
 		->where('Kode_Keberangkatan', $id)
         ->get();
 		$pdf = PDF::loadview('pages/admin/keberangkatan/cetak_pdf',['pgw'=>$pgw]);
@@ -105,7 +113,9 @@ class KeberangkatanControllers extends Controller
 				'ID_Jamaah' => $id_jamaah,
 				'ID_Paket_Umrah' => $request->id_paket_umrah,
 				'Tanggal_Keberangkatan' => $request->tanggal_keberangkatan,
-				'Titik_Kumpul' => $request->titik_kumpul
+				'Titik_Kumpul' => $request->titik_kumpul,
+				'Tanggal_Kepulangan' => $request->tanggal_kepulangan,
+				'Keterangan' => $request->keterangan,
 			]);
 		}
     }
@@ -129,6 +139,8 @@ class KeberangkatanControllers extends Controller
 			'keberangkatan.ID_Paket_Umrah',
 			'keberangkatan.Tanggal_Keberangkatan',
 			'keberangkatan.Titik_Kumpul',
+			'keberangkatan.Tanggal_Kepulangan',
+			'keberangkatan.Keterangan',
 			DB::raw('GROUP_CONCAT(DISTINCT keberangkatan.Kode_Keberangkatan SEPARATOR ", ") as Kode_Keberangkatan'),
 			DB::raw('GROUP_CONCAT(DISTINCT paket_umrah.Nama_Paket_Umrah SEPARATOR ", ") as Nama_Paket_Umrah'),
 			DB::raw('GROUP_CONCAT(jamaah.NIK SEPARATOR ", ") as NIK'),

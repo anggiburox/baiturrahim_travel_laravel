@@ -63,12 +63,22 @@
                         <input type="date" class="form-control" name="tanggal_keberangkatan"
                             value='{{$pp->Tanggal_Keberangkatan}}' required readonly style='background:#e6e6fa;'>
                     </div>
+                    <label for="inputText" class="col-sm-3 col-form-label">Tanggal Kepulangan </label>
+                    <div class="col-sm-3">
+                        <input type="date" class="form-control" name="tanggal_keberangkatan"
+                            value='{{$pp->Tanggal_Kepulangan}}' required readonly style='background:#e6e6fa;'>
+                    </div>
                 </div>
                 <div class="row mb-3">
                     <label for="inputText" class="col-sm-3 col-form-label">Titik Kumpul</label>
                     <div class="col-sm-3">
                         <textarea name="titik_kumpul" required class='form-control' readonly
                             style='background:#e6e6fa;'>{{$pp->Titik_Kumpul}}</textarea>
+                    </div>
+                    <label for="inputText" class="col-sm-3 col-form-label">Keterangan</label>
+                    <div class="col-sm-3">
+                        <textarea name="titik_kumpul" required class='form-control' readonly
+                            style='background:#e6e6fa;'>{{$pp->Keterangan}}</textarea>
                     </div>
                 </div>
                 <div class="col-12">

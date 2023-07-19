@@ -11,7 +11,7 @@ class KeberangkatanModel extends Model
     use HasFactory;
 
     protected $table='keberangkatan';  
-    protected $fillable=['ID_Keberangkatan','Kode_Keberangkatan','ID_Jamaah','ID_Paket_Umrah','Tanggal_Keberangkatan','Titik_Kumpul'];  
+    protected $fillable=['ID_Keberangkatan','Kode_Keberangkatan','ID_Jamaah','ID_Paket_Umrah','Tanggal_Keberangkatan','Titik_Kumpul','Tanggal_Kepulangan','Keterangan'];  
     public $timestamps = false;
     public $incrementing = false;
     protected $primaryKey = 'ID_Keberangkatan';
@@ -44,13 +44,17 @@ class KeberangkatanModel extends Model
                 'keberangkatan.ID_Paket_Umrah',
                 'keberangkatan.Tanggal_Keberangkatan',
                 'keberangkatan.Titik_Kumpul',
+                'keberangkatan.Tanggal_Kepulangan',
+                'keberangkatan.Keterangan',
                 DB::raw('GROUP_CONCAT(DISTINCT keberangkatan.Kode_Keberangkatan SEPARATOR ", ") as Kode_Keberangkatan'),
                 DB::raw('GROUP_CONCAT(DISTINCT paket_umrah.Nama_Paket_Umrah SEPARATOR ", ") as Nama_Paket_Umrah'),
                 DB::raw('GROUP_CONCAT(jamaah.NIK SEPARATOR ", ") as NIK'),
                 DB::raw('GROUP_CONCAT(jamaah.Nama_Jamaah SEPARATOR ", ") as Nama_Jamaah'),
                 DB::raw('GROUP_CONCAT(paket_umrah.Harga_Paket_Umrah SEPARATOR ", ") as Harga_Paket_Umrah')
             )
-            ->groupBy('keberangkatan.ID_Paket_Umrah', 'keberangkatan.Tanggal_Keberangkatan', 'keberangkatan.Titik_Kumpul')
+            ->groupBy('keberangkatan.ID_Paket_Umrah', 'keberangkatan.Tanggal_Keberangkatan', 'keberangkatan.Titik_Kumpul',
+            'keberangkatan.Tanggal_Kepulangan',
+            'keberangkatan.Keterangan')
             ->get();
     
         return $brng;
@@ -64,6 +68,8 @@ class KeberangkatanModel extends Model
                 'keberangkatan.ID_Paket_Umrah',
                 'keberangkatan.Tanggal_Keberangkatan',
                 'keberangkatan.Titik_Kumpul',
+                'keberangkatan.Tanggal_Kepulangan',
+                'keberangkatan.Keterangan',
                 DB::raw('GROUP_CONCAT(DISTINCT keberangkatan.Kode_Keberangkatan SEPARATOR ", ") as Kode_Keberangkatan'),
                 DB::raw('GROUP_CONCAT(DISTINCT paket_umrah.Nama_Paket_Umrah SEPARATOR ", ") as Nama_Paket_Umrah'),
                 DB::raw('GROUP_CONCAT(keberangkatan.ID_Keberangkatan SEPARATOR ", ") as ID_Keberangkatan'),
@@ -71,7 +77,9 @@ class KeberangkatanModel extends Model
                 DB::raw('GROUP_CONCAT(jamaah.Nama_Jamaah SEPARATOR ", ") as Nama_Jamaah'),
                 DB::raw('GROUP_CONCAT(paket_umrah.Harga_Paket_Umrah SEPARATOR ", ") as Harga_Paket_Umrah')
             )
-            ->groupBy('keberangkatan.ID_Paket_Umrah', 'keberangkatan.Tanggal_Keberangkatan', 'keberangkatan.Titik_Kumpul')
+            ->groupBy('keberangkatan.ID_Paket_Umrah', 'keberangkatan.Tanggal_Keberangkatan', 'keberangkatan.Titik_Kumpul',
+            'keberangkatan.Tanggal_Kepulangan',
+            'keberangkatan.Keterangan')
             ->where('jamaah.NIK', $id)
             ->get();
     

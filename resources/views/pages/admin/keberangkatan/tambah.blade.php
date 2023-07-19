@@ -85,12 +85,23 @@
                         <input type="date" class="form-control" name="tanggal_keberangkatan" value='{{date("Y-m-d")}}'
                             required>
                     </div>
+                    <label for="inputText" class="col-sm-3 col-form-label">Tanggal Kepulangan <label
+                            style='color:red;'>(*)</label></label>
+                    <div class="col-sm-3">
+                        <input type="date" class="form-control" name="tanggal_kepulangan" value='{{date("Y-m-d")}}'
+                            required>
+                    </div>
                 </div>
                 <div class="row mb-3">
                     <label for="inputText" class="col-sm-3 col-form-label">Titik Kumpul <label
                             style='color:red;'>(*)</label></label>
                     <div class="col-sm-3">
                         <textarea name="titik_kumpul" required class='form-control'></textarea>
+                    </div>
+                    <label for="inputText" class="col-sm-3 col-form-label">Keterangan <label
+                            style='color:red;'>(*)</label></label>
+                    <div class="col-sm-3">
+                        <textarea name="keterangan" required class='form-control'></textarea>
                     </div>
                 </div>
                 <div class="col-12">

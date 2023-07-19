@@ -52,8 +52,17 @@
                 {{ \Carbon\Carbon::parse($p->Tanggal_Keberangkatan)->isoFormat('D MMMM Y') }}</td>
         </tr>
         <tr>
+            <td width="2%" style='font-weight:bold;'>Tanggal Kepulangan</td>
+            <td width="5%" style="text-align: center">
+                {{ \Carbon\Carbon::parse($p->Tanggal_Kepulangan)->isoFormat('D MMMM Y') }}</td>
+        </tr>
+        <tr>
             <td width="2%" style='font-weight:bold;'>Titik Kumpul</td>
             <td width="5%" style="text-align: center">{{$p->Titik_Kumpul}}</td>
+        </tr>
+        <tr>
+            <td width="2%" style='font-weight:bold;'>Keterangan</td>
+            <td width="5%" style="text-align: center">{{$p->Keterangan}}</td>
         </tr>
         @endforeach
     </table>

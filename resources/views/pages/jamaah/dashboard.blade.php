@@ -27,7 +27,9 @@
                                 <th scope="col">NIK - Nama Jamaah</th>
                                 <th scope="col">Nama - Harga Paket Umrah</th>
                                 <th scope="col">Tanggal Keberangkatan</th>
+                                <th scope="col">Tanggal Kepulangan</th>
                                 <th scope="col">Titik Kumpul</th>
+                                <th scope="col">Keterangan</th>
                                 <th scope="col">Cetak</th>
                             </tr>
                         </thead>
@@ -43,7 +45,9 @@
                                     {{ number_format(floatval($p->Harga_Paket_Umrah), 0, ',', '.') }}
                                 </td>
                                 <td>{{ \Carbon\Carbon::parse($p->Tanggal_Keberangkatan)->isoFormat('D MMMM Y') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($p->Tanggal_Kepulangan)->isoFormat('D MMMM Y') }}</td>
                                 <td>{{$p->Titik_Kumpul}}</td>
+                                <td>{{$p->Keterangan}}</td>
                                 <td>
                                     <a href="cetak_pdf_satuan/{{$p->ID_Keberangkatan}}"
                                         class="btn mb-1 btn-success btn-sm" data-toggle="tooltip" data-placement="top"
