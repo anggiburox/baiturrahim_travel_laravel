@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 16, 2023 at 01:46 PM
+-- Generation Time: Jul 19, 2023 at 05:08 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.0.23
 
@@ -76,6 +76,8 @@ CREATE TABLE `keberangkatan` (
   `ID_Paket_Umrah` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Tanggal_Keberangkatan` date NOT NULL,
   `Titik_Kumpul` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Tanggal_Kepulangan` date NOT NULL,
+  `Keterangan` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -97,14 +99,14 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(41, '2014_10_12_000000_create_users_table', 1),
-(42, '2014_10_12_100000_create_password_resets_table', 1),
-(43, '2019_08_19_000000_create_failed_jobs_table', 1),
-(44, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(45, '2023_05_24_012911_create_paket_umrah_table', 1),
-(46, '2023_05_24_093120_create_jamaah_table', 1),
-(47, '2023_05_28_150505_create_keberangkatan_table', 1),
-(48, '2023_06_04_013222_create_users_roles_table', 1);
+(65, '2014_10_12_000000_create_users_table', 1),
+(66, '2014_10_12_100000_create_password_resets_table', 1),
+(67, '2019_08_19_000000_create_failed_jobs_table', 1),
+(68, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(69, '2023_05_24_012911_create_paket_umrah_table', 1),
+(70, '2023_05_24_093120_create_jamaah_table', 1),
+(71, '2023_05_28_150505_create_keberangkatan_table', 1),
+(72, '2023_06_04_013222_create_users_roles_table', 1);
 
 -- --------------------------------------------------------
 
@@ -172,7 +174,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`ID_User`, `ID_Jamaah`, `Username`, `Password`, `ID_User_Roles`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'admin', 'travel', 1, NULL, NULL);
+(1, NULL, 'admin', 'travel', 1, NULL, NULL),
+(2, NULL, 'pimpinan', 'pimpinan123', 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -277,7 +280,7 @@ ALTER TABLE `keberangkatan`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -289,7 +292,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID_User` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_User` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users_roles`
