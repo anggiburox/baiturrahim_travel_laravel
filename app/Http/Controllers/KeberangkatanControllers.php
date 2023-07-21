@@ -141,6 +141,8 @@ class KeberangkatanControllers extends Controller
 			'keberangkatan.Titik_Kumpul',
 			'keberangkatan.Tanggal_Kepulangan',
 			'keberangkatan.Keterangan',
+			'keberangkatan.Tanggal_Kepulangan',
+			'keberangkatan.Keterangan',
 			DB::raw('GROUP_CONCAT(DISTINCT keberangkatan.Kode_Keberangkatan SEPARATOR ", ") as Kode_Keberangkatan'),
 			DB::raw('GROUP_CONCAT(DISTINCT paket_umrah.Nama_Paket_Umrah SEPARATOR ", ") as Nama_Paket_Umrah'),
 			DB::raw('GROUP_CONCAT(jamaah.NIK SEPARATOR ", ") as NIK'),
@@ -149,7 +151,9 @@ class KeberangkatanControllers extends Controller
 			DB::raw('GROUP_CONCAT(jamaah.Alamat SEPARATOR ", ") as Alamat'),
 			DB::raw('GROUP_CONCAT(paket_umrah.Harga_Paket_Umrah SEPARATOR ", ") as Harga_Paket_Umrah')
 		)
-		->groupBy('keberangkatan.ID_Paket_Umrah', 'keberangkatan.Tanggal_Keberangkatan', 'keberangkatan.Titik_Kumpul')
+		->groupBy('keberangkatan.ID_Paket_Umrah', 'keberangkatan.Tanggal_Keberangkatan', 'keberangkatan.Titik_Kumpul',
+		'keberangkatan.Tanggal_Kepulangan',
+		'keberangkatan.Keterangan')
 		->where('Kode_Keberangkatan', $id)
         ->get();
 		// passing data jamaah yang didapat ke view edit.blade.php
