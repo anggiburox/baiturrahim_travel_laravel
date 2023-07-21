@@ -57,9 +57,28 @@ class KeberangkatanControllers extends Controller
 	{
 		// mengambil data keberangkatan berdasarkan id yang dipilih
 		$pgw = DB::table('keberangkatan')
-        ->select('Kode_Keberangkatan', 'Tanggal_Keberangkatan','Titik_Kumpul','Tanggal_Kepulangan','Keterangan','ID_Paket_Umrah','ID_Jamaah')
-        ->distinct()
-        ->where('Kode_Keberangkatan', $id)
+		->join('jamaah', 'jamaah.ID_Jamaah', '=', 'keberangkatan.ID_Jamaah')
+        ->join('paket_umrah', 'paket_umrah.ID_Paket_Umrah', '=', 'keberangkatan.ID_Paket_Umrah')
+		->select(
+			'keberangkatan.ID_Paket_Umrah',
+			'keberangkatan.Tanggal_Keberangkatan',
+			'keberangkatan.Titik_Kumpul',
+			'keberangkatan.Tanggal_Kepulangan',
+			'keberangkatan.Keterangan',
+			'keberangkatan.Tanggal_Kepulangan',
+			'keberangkatan.Keterangan',
+			DB::raw('GROUP_CONCAT(DISTINCT keberangkatan.Kode_Keberangkatan SEPARATOR ", ") as Kode_Keberangkatan'),
+			DB::raw('GROUP_CONCAT(DISTINCT paket_umrah.Nama_Paket_Umrah SEPARATOR ", ") as Nama_Paket_Umrah'),
+			DB::raw('GROUP_CONCAT(jamaah.NIK SEPARATOR ", ") as NIK'),
+			DB::raw('GROUP_CONCAT(jamaah.Nama_Jamaah SEPARATOR ", ") as Nama_Jamaah'),
+			DB::raw('GROUP_CONCAT(jamaah.Nomor_Telepon SEPARATOR ", ") as Nomor_Telepon'),
+			DB::raw('GROUP_CONCAT(jamaah.Alamat SEPARATOR ", ") as Alamat'),
+			DB::raw('GROUP_CONCAT(paket_umrah.Harga_Paket_Umrah SEPARATOR ", ") as Harga_Paket_Umrah')
+		)
+		->groupBy('keberangkatan.ID_Paket_Umrah', 'keberangkatan.Tanggal_Keberangkatan', 'keberangkatan.Titik_Kumpul',
+		'keberangkatan.Tanggal_Kepulangan',
+		'keberangkatan.Keterangan')
+		->where('Kode_Keberangkatan', $id)
         ->get();
 		$paket = PaketUmrahModel::get();
 		$jamaah = JamaahModel::get();
@@ -76,8 +95,6 @@ class KeberangkatanControllers extends Controller
 			'keberangkatan.ID_Paket_Umrah',
 			'keberangkatan.Tanggal_Keberangkatan',
 			'keberangkatan.Titik_Kumpul',
-			'keberangkatan.Tanggal_Kepulangan',
-			'keberangkatan.Keterangan',
 			'keberangkatan.Tanggal_Kepulangan',
 			'keberangkatan.Keterangan',
 			DB::raw('GROUP_CONCAT(DISTINCT keberangkatan.Kode_Keberangkatan SEPARATOR ", ") as Kode_Keberangkatan'),
